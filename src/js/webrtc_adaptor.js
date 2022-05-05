@@ -446,7 +446,14 @@ export default function WebRTCAdaptor(initialValues)
 		else {
 			// get only audio
 			var media_audio_constraint = { audio: thiz.mediaConstraints.audio };
-			navigator.mediaDevices.getUserMedia(media_audio_constraint)
+			navigator.mediaDevices.getUserMedia({
+				audio: {
+					echoCancellation: false,
+					autoGainControl: false,
+					noiseSuppression: false,
+					latency: 0
+				}
+			})
 			.then(function(stream) {
 				thiz.gotStream(stream);
 			})
