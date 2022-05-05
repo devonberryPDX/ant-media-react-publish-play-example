@@ -21,7 +21,7 @@ class Playernewauto extends React.Component {
             OfferToReceiveAudio: true,
             OfferToReceiveVideo: true
         },
-        websocketURL: "wss://antmediaserver:5443/WebRTCAppEE/websocket",
+        websocketURL: "wss://berryhousehold.ddns.net:5443/WebRTCAppEE/websocket",
         isShow:false
     };
 

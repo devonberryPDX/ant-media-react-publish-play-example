@@ -19,9 +19,9 @@ class Playernew extends React.Component {
         },
         sdpConstraints: {
             OfferToReceiveAudio: true,
-            OfferToReceiveVideo: true
+            OfferToReceiveVideo: false
         },
-        websocketURL: "wss://antmediaserver:5443//WebRTCAppEE/websocket",
+        websocketURL: "wss://berryhousehold.ddns.net:5443//WebRTCAppEE/websocket",
         isShow:false
     };
 
@@ -51,7 +51,7 @@ class Playernew extends React.Component {
             mediaConstraints: this.state.mediaConstraints,
             peerconnection_config: this.state.pc_config,
             sdp_constraints: this.state.sdpConstraints,
-            remoteVideoId: "remoteVideo",
+            remoteAudioId: "remoteAudio",
             isPlayMode: true,
             debug: true,
             candidateTypes: ["tcp", "udp"],
@@ -117,7 +117,7 @@ class Playernew extends React.Component {
             <>
                 <div className="Player">
                     YOU ARE IN PLAY PAGE <br />
-                    <video id="remoteVideo" autoPlay controls playsInline></video>
+                    <audio id="remoteAudio" autoPlay controls playsInline></audio>
                     <br/>
                     <input type="text" onChange={this.streamChangeHandler}/>
                     {

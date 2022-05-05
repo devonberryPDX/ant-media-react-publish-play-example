@@ -7,7 +7,7 @@ class Publishnew extends React.Component {
 
     state:Object = {
         mediaConstraints: {
-            video: true,
+            video: false,
             audio: true
         },
         streamName: 'stream1',
@@ -21,7 +21,7 @@ class Publishnew extends React.Component {
             OfferToReceiveAudio: false,
             OfferToReceiveVideo: false
         },
-        websocketURL: "wss://antmediaserver:5443/WebRTCAppEE/websocket",
+        websocketURL: "wss://berryhousehold.ddns.net:5443/WebRTCAppEE/websocket",
         isShow:false
     };
 
@@ -30,10 +30,10 @@ class Publishnew extends React.Component {
     }
 
     componentDidMount():void {
-        let videox = document.querySelector("#localVideo");
+        let videox = document.querySelector("#localAudio");
 
         if (navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: true })
+            navigator.mediaDevices.getUserMedia({ audio: true })
                 .then(function (stream) {
                     videox.srcObject = stream;
                 })
@@ -63,7 +63,7 @@ class Publishnew extends React.Component {
             mediaConstraints: this.state.mediaConstraints,
             peerconnection_config: this.state.pc_config,
             sdp_constraints: this.state.sdpConstraints,
-            localVideoId: "localVideo",
+            localVideoId: "localAudio",
             debug: true,
             bandwidth:900,
             callback: function (info, obj) {
@@ -134,7 +134,7 @@ class Publishnew extends React.Component {
             <>
                 <div className="Publish">
                     YOU ARE IN PUBLISH PAGE <br />
-                    <video id="localVideo" autoPlay muted controls playsInline></video>
+                    <audio id="localAudio" autoPlay muted controls playsInline></audio>
                     <br/>
                     <input type="text" onChange={this.streamChangeHandler}/>
                     {
