@@ -67,10 +67,10 @@ class Publishnew extends React.Component {
             debug: true,
             bandwidth:900,
             callback: function (info, obj) {
-                if (info == "initialized") {
+                if (info === "initialized") {
                     console.log("initialized");
 
-                } else if (info == "publish_started") {
+                } else if (info === "publish_started") {
                     //stream is being published
                     console.log("publish started");
                     alert("publish started");
@@ -78,25 +78,25 @@ class Publishnew extends React.Component {
                         isShow:false
                     });
 
-                } else if (info == "publish_finished") {
+                } else if (info === "publish_finished") {
                     //stream is being finished
                     console.log("publish finished");
                     thiz.setState({
                         isShow:true
                     });
 
-                } else if (info == "closed") {
+                } else if (info === "closed") {
                     //console.log("Connection closed");
                     if (typeof obj != "undefined") {
                         console.log("Connecton closed: "
                             + JSON.stringify(obj));
                     }
-                } else if (info == "streamInformation") {
+                } else if (info === "streamInformation") {
 
 
-                } else if (info == "ice_connection_state_changed") {
+                } else if (info === "ice_connection_state_changed") {
                     console.log("iceConnectionState Changed: ", JSON.stringify(obj));
-                } else if (info == "updated_stats") {
+                } else if (info === "updated_stats") {
                     //obj is the PeerStats which has fields
                     //averageIncomingBitrate - kbits/sec
                     //currentIncomingBitrate - kbits/sec
@@ -108,9 +108,9 @@ class Publishnew extends React.Component {
                         + " fractionLost: " + obj.fractionLost
                         + " audio level: " + obj.audioLevel);
 
-                } else if (info == "data_received") {
+                } else if (info === "data_received") {
                     console.log("Data received: " + obj.event.data + " type: " + obj.event.type + " for stream: " + obj.streamId);
-                } else if (info == "bitrateMeasurement") {
+                } else if (info === "bitrateMeasurement") {
                     console.log(info + " notification received");
 
                     console.log(obj);

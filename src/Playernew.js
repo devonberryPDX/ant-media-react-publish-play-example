@@ -56,30 +56,30 @@ class Playernew extends React.Component {
             debug: true,
             candidateTypes: ["tcp", "udp"],
             callback: function (info, obj) {
-                if (info == "initialized") {
+                if (info === "initialized") {
                     console.log("initialized");
 
-                } else if (info == "play_started") {
+                } else if (info === "play_started") {
                     //joined the stream
                     console.log("play started");
 
 
-                } else if (info == "play_finished") {
+                } else if (info === "play_finished") {
                     //leaved the stream
                     console.log("play finished");
 
-                } else if (info == "closed") {
+                } else if (info === "closed") {
                     //console.log("Connection closed");
                     if (typeof obj != "undefined") {
                         console.log("Connecton closed: "
                             + JSON.stringify(obj));
                     }
-                } else if (info == "streamInformation") {
+                } else if (info === "streamInformation") {
 
 
-                } else if (info == "ice_connection_state_changed") {
+                } else if (info === "ice_connection_state_changed") {
                     console.log("iceConnectionState Changed: ", JSON.stringify(obj));
-                } else if (info == "updated_stats") {
+                } else if (info === "updated_stats") {
                     //obj is the PeerStats which has fields
                     //averageIncomingBitrate - kbits/sec
                     //currentIncomingBitrate - kbits/sec
@@ -91,9 +91,9 @@ class Playernew extends React.Component {
                         + " fractionLost: " + obj.fractionLost
                         + " audio level: " + obj.audioLevel);
 
-                } else if (info == "data_received") {
+                } else if (info === "data_received") {
                     console.log("Data received: " + obj.event.data + " type: " + obj.event.type + " for stream: " + obj.streamId);
-                } else if (info == "bitrateMeasurement") {
+                } else if (info === "bitrateMeasurement") {
                     console.log(info + " notification received");
 
                     console.log(obj);
