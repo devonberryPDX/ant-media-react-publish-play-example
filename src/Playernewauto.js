@@ -25,10 +25,6 @@ class Playernewauto extends React.Component {
         isShow:false
     };
 
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount():void {
         this.webRTCAdaptor = this.initiateWebrtc();
         this.setState({
@@ -113,7 +109,7 @@ class Playernewauto extends React.Component {
     }
 
     render() {
-        const {streamName, isShow} = this.state;
+        //const {streamName, isShow} = this.state;
 
         return (
             <>

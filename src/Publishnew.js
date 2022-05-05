@@ -24,11 +24,7 @@ class Publishnew extends React.Component {
         websocketURL: "wss://berryhousehold.ddns.net:5443/WebRTCAppEE/websocket",
         isShow:false
     };
-
-    constructor(props) {
-        super(props);
-    }
-
+    
     componentDidMount():void {
         let videox = document.querySelector("#localAudio");
 

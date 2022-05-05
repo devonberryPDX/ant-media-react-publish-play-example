@@ -25,10 +25,6 @@ class Playernew extends React.Component {
         isShow:false
     };
 
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount():void {
         this.webRTCAdaptor = this.initiateWebrtc();
         this.setState({

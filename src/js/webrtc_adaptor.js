@@ -3,19 +3,23 @@
  * @returns
  */
 
-"use strict";
 import adapter from 'webrtc-adapter';
+/*
 var pc_config = {
 	'iceServers' : [ {
 		'urls' : 'stun:stun.l.google.com:19302'
 	} ]
 };
+*/
 
+/*
 var sdpConstraints = {
 	OfferToReceiveAudio : true,
 	OfferToReceiveVideo : true
 
 };
+*/
+
 var mediaConstraints = {
 	video : false,
 	audio : false
@@ -92,15 +96,15 @@ export default function WebRTCAdaptor(initialValues)
 	var thiz = this;
 	thiz.peerconnection_config = null;
 	thiz.sdp_constraints = null;
-	thiz.remotePeerConnection = new Array();
-	thiz.remotePeerConnectionStats = new Array();
-	thiz.remoteDescriptionSet = new Array();
-	thiz.iceCandidateList = new Array();
+	thiz.remotePeerConnection = [];
+	thiz.remotePeerConnectionStats = [];
+	thiz.remoteDescriptionSet = [];
+	thiz.iceCandidateList = [];
 	thiz.webSocketAdaptor = null;
 	thiz.roomName = null;
 	thiz.videoTrackSender = null;
 	thiz.audioTrackSender = null;
-	thiz.playStreamId = new Array();
+	thiz.playStreamId = [];
 	thiz.micGainNode = null;
 	thiz.localStream = null;
 	thiz.bandwidth = 900; //default bandwidth kbps
@@ -445,7 +449,7 @@ export default function WebRTCAdaptor(initialValues)
 		}
 		else {
 			// get only audio
-			var media_audio_constraint = { audio: thiz.mediaConstraints.audio };
+			//var media_audio_constraint = { audio: thiz.mediaConstraints.audio };
 			navigator.mediaDevices.getUserMedia({
 				audio: {
 					echoCancellation: false,
@@ -622,7 +626,7 @@ export default function WebRTCAdaptor(initialValues)
 		}
 
 		navigator.mediaDevices.enumerateDevices().then(function(devices) {
-			let deviceArray = new Array();
+			let deviceArray = [];
 
 			devices.forEach(function(device) {
 				if (device.kind === "audioinput" || device.kind === "videoinput") {
@@ -928,7 +932,7 @@ export default function WebRTCAdaptor(initialValues)
 			console.log("stream id in init peer connection: " + streamId + " close stream id: " + closedStreamId);
 			thiz.remotePeerConnection[streamId] = new RTCPeerConnection(thiz.peerconnection_config);
 			thiz.remoteDescriptionSet[streamId] = false;
-			thiz.iceCandidateList[streamId] = new Array();
+			thiz.iceCandidateList[streamId] = [];
 			if (!thiz.playStreamId.includes(streamId))
 			{
 				if(thiz.localStream != null) {
@@ -1376,7 +1380,7 @@ export default function WebRTCAdaptor(initialValues)
 			thiz.remotePeerConnection[key].close();
 		}
 		//free the remote peer connection by initializing again
-		thiz.remotePeerConnection = new Array();
+		thiz.remotePeerConnection = [];
 		thiz.webSocketAdaptor.close();
 	}
 
