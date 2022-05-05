@@ -33,7 +33,14 @@ class Publishnew extends React.Component {
         let videox = document.querySelector("#localAudio");
 
         if (navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ audio: true })
+            navigator.mediaDevices.getUserMedia({
+                audio: {
+                    echoCancellation: false,
+                    autoGainControl: false,
+                    noiseSuppression: false,
+                    latency: 0
+                }
+             })
                 .then(function (stream) {
                     videox.srcObject = stream;
                 })

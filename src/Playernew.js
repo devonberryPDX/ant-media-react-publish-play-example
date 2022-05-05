@@ -48,7 +48,15 @@ class Playernew extends React.Component {
     initiateWebrtc():WebRTCAdaptor {
         return new WebRTCAdaptor({
             websocket_url: this.state.websocketURL,
-            mediaConstraints: this.state.mediaConstraints,
+            //mediaConstraints: this.state.mediaConstraints,
+            mediaConstraints: {
+                audio: {
+                    echoCancellation: false,
+                    autoGainControl: false,
+                    noiseSuppression: false,
+                    latency: 0
+                }
+            },
             peerconnection_config: this.state.pc_config,
             sdp_constraints: this.state.sdpConstraints,
             remoteAudioId: "remoteAudio",
