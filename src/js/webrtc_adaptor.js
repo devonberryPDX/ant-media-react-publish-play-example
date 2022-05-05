@@ -238,16 +238,6 @@ export default function WebRTCAdaptor(initialValues)
 
 	this.prepareStreamTracks = function (mediaConstraints,audioConstraint,stream,streamId) {
 
-		audioConstraint = {
-			audio: {
-				echoCancellation: false,
-				autoGainControl: false,
-				noiseSuppression: false,
-				latency: 0
-			}
-		}
-
-
 		//this trick, getting audio and video separately, make us add or remove tracks on the fly
 		var audioTrack = stream.getAudioTracks();
 		if (audioTrack.length > 0) {
@@ -257,14 +247,7 @@ export default function WebRTCAdaptor(initialValues)
 		//now get only audio to add this stream
 		if (audioConstraint != "undefined" && audioConstraint != false) {
 			var media_audio_constraint = { audio: audioConstraint};
-			navigator.mediaDevices.getUserMedia({
-				audio: {
-					echoCancellation: false,
-					autoGainControl: false,
-					noiseSuppression: false,
-					latency: 0
-				}
-			})
+			navigator.mediaDevices.getUserMedia(media_audio_constraint)
 			.then(function(audioStream) {
 				//add callback if desktop is sharing
 
@@ -336,14 +319,7 @@ export default function WebRTCAdaptor(initialValues)
 
 		// If mediaConstraints only user camera
 		else {
-			navigator.mediaDevices.getUserMedia({
-				audio: {
-					echoCancellation: false,
-					autoGainControl: false,
-					noiseSuppression: false,
-					latency: 0
-				}
-			})
+			navigator.mediaDevices.getUserMedia(mediaConstraints)
 			.then(function(stream){
 
 				thiz.prepareStreamTracks(mediaConstraints,audioConstraint,stream, streamId);
@@ -423,14 +399,7 @@ export default function WebRTCAdaptor(initialValues)
 			{
 				//this case captures mic and video(audio(screen audio) + video(screen)) and then provide mute/unmute mic with
 				//enableMicInMixedAudio
-				navigator.mediaDevices.getUserMedia({
-					audio: {
-						echoCancellation: false,
-						autoGainControl: false,
-						noiseSuppression: false,
-						latency: 0
-					}
-				}).then(function(micStream){
+				navigator.mediaDevices.getUserMedia({audio:true, video:false}).then(function(micStream){
 					navigator.mediaDevices.getUserMedia(thiz.mediaConstraints)
 					.then(function(stream)
 							{
