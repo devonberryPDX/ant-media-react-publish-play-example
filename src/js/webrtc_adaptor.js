@@ -486,7 +486,7 @@ export default function WebRTCAdaptor(initialValues)
 	}
 
 	this.publish = function (streamId, token) {
-		console.error("here",thiz);
+		//console.error("here",thiz);
 		var jsCmd = {
 				command : "publish",
 				streamId : streamId,
@@ -992,10 +992,11 @@ export default function WebRTCAdaptor(initialValues)
 				if (!thiz.isPlayMode) {
 					if (thiz.remotePeerConnection[streamId].iceConnectionState === "connected") {
 
-						thiz.changeBandwidth(thiz.bandwidth, streamId).then(() => {
+						/*thiz.changeBandwidth(thiz.bandwidth, streamId).then(() => {
 							console.log("Bandwidth is changed to " + thiz.bandwidth);
 						})
 						.catch(e => console.error(e));
+						*/
 					}
 				}
 			}
