@@ -14,7 +14,7 @@ module.exports = {
             //cert: fs.readFileSync("cert.crt"),
             //ca: fs.readFileSync("ca.crt"),
         },
-        host: "192.168.1.11",
+        host: "berryhousehold.ddns.net",
         port: 8000,
     }
 };
