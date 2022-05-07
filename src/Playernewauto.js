@@ -5,14 +5,6 @@ class Playernewauto extends React.Component {
     constructor(props) {
         super(props);
 
-        /*
-        this.componentDidMount = this.componentDidMount().bind(this);
-        this.streamChangeHandler = this.streamChangeHandler().bind(this);
-        this.onStartPlaying = this.onStartPlaying().bind(this);
-        this.initiateWebrtc = this.initiateWebrtc().bind(this);
-        */
-
-        this.webRTCAdaptor = null;
         this.state = {
             mediaConstraints: {
                 video: false,
@@ -32,20 +24,20 @@ class Playernewauto extends React.Component {
             websocketURL: "wss://berryhousehold.ddns.net:5443/WebRTCAppEE/websocket",
             isShow: false
         };
+
+        this.webRTCAdaptor = null;
     }
 
     componentDidMount() {
         this.webRTCAdaptor = this.initiateWebrtc();
-        /*
         this.setState({
             isShow: true
         });
-        */
     }
 
-    streamChangeHandler(value) {
-        console.log(value);
-        //this.setState({ streamName: value });
+    streamChangeHandler = ({ target: { value } }) => {
+        console.log("Current value:", value);
+        this.setState({ streamName: value });
     }
 
     onStartPlaying(name) {
