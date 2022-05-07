@@ -27,7 +27,7 @@ class Playernewauto extends React.Component {
             },
             sdpConstraints: {
                 OfferToReceiveAudio: true,
-                OfferToReceiveVideo: true
+                OfferToReceiveVideo: false
             },
             websocketURL: "wss://berryhousehold.ddns.net:5443/WebRTCAppEE/websocket",
             isShow: false
@@ -57,7 +57,7 @@ class Playernewauto extends React.Component {
             mediaConstraints: this.state.mediaConstraints,
             peerconnection_config: this.state.pc_config,
             sdp_constraints: this.state.sdpConstraints,
-            remoteVideoId: "remoteVideo",
+            remoteVideoId: "remoteAudio",
             isPlayMode: true,
             debug: true,
             candidateTypes: ["tcp", "udp"],
@@ -124,7 +124,7 @@ class Playernewauto extends React.Component {
             <>
                 <div className="Player">
                     YOU ARE IN AUTO PLAY PAGE <br />
-                    <video id="remoteVideo" autoPlay controls playsInline></video>
+                    <audio id="remoteAudio" autoPlay controls playsInline></audio>
                     <br />
                 </div>
                 <div />
