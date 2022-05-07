@@ -38,9 +38,11 @@ class Playernew extends React.Component {
 
     componentDidMount() {
         this.webRTCAdaptor = this.initiateWebrtc();
+        /*
         this.setState({
             isShow: true
         });
+        */
     }
 
     streamChangeHandler(value) {
