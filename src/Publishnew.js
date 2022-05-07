@@ -1,31 +1,41 @@
 import React from 'react';
-import './Player.css';
 import WebRTCAdaptor from './js/webrtc_adaptor';
 
 class Publishnew extends React.Component {
-    webRTCAdaptor:?Object = null;
+    constructor(props) {
+        super(props);
 
-    state:Object = {
-        mediaConstraints: {
-            video: false,
-            audio: true
-        },
-        streamName: 'stream1',
-        token: '',
-        pc_config: {
-            'iceServers': [{
-                'urls': 'stun:stun.l.google.com:19302'
-            }]
-        },
-        sdpConstraints: {
-            OfferToReceiveAudio: false,
-            OfferToReceiveVideo: false
-        },
-        websocketURL: "wss://berryhousehold.ddns.net:5443/WebRTCAppEE/websocket",
-        isShow:false
-    };
-    
-    componentDidMount():void {
+        /*
+        this.componentDidMount = this.componentDidMount().bind(this);
+        this.streamChangeHandler = this.streamChangeHandler().bind(this);
+        this.onStartPlaying = this.onStartPlaying().bind(this);
+        this.initiateWebrtc = this.initiateWebrtc().bind(this);
+        */
+
+        this.webRTCAdaptor = null;
+
+        this.state = {
+            mediaConstraints: {
+                video: false,
+                audio: true
+            },
+            streamName: 'stream1',
+            token: '',
+            pc_config: {
+                'iceServers': [{
+                    'urls': 'stun:stun.l.google.com:19302'
+                }]
+            },
+            sdpConstraints: {
+                OfferToReceiveAudio: false,
+                OfferToReceiveVideo: false
+            },
+            websocketURL: "wss://berryhousehold.ddns.net:5443/WebRTCAppEE/websocket",
+            isShow: false
+        };
+    }
+
+    componentDidMount() {
         let videox = document.querySelector("#localAudio");
 
         if (navigator.mediaDevices.getUserMedia) {
@@ -39,20 +49,20 @@ class Publishnew extends React.Component {
         };
         this.webRTCAdaptor = this.initiateWebrtc();
         this.setState({
-            isShow:true
+            isShow: true
         });
     }
 
-    streamChangeHandler = ({target:{value}}:Event):void => {
-        console.log(value);
-        this.setState({streamName: value});
+    streamChangeHandler(value) {
+        console.log("Current value:", value);
+        //this.setState({ streamName: value });
     }
 
-    onStartPublishing = (name:String):void => {
+    onStartPublishing(name) {
         this.webRTCAdaptor.publish(this.state.streamName, this.state.token);
     }
 
-    initiateWebrtc():WebRTCAdaptor {
+    initiateWebrtc() {
         let thiz = this;
         return new WebRTCAdaptor({
             websocket_url: this.state.websocketURL,
@@ -61,7 +71,7 @@ class Publishnew extends React.Component {
             sdp_constraints: this.state.sdpConstraints,
             localVideoId: "localAudio",
             debug: true,
-            bandwidth:900,
+            bandwidth: 900,
             callback: function (info, obj) {
                 if (info === "initialized") {
                     console.log("initialized");
@@ -71,14 +81,14 @@ class Publishnew extends React.Component {
                     console.log("publish started");
                     alert("publish started");
                     thiz.setState({
-                        isShow:false
+                        isShow: false
                     });
 
                 } else if (info === "publish_finished") {
                     //stream is being finished
                     console.log("publish finished");
                     thiz.setState({
-                        isShow:true
+                        isShow: true
                     });
 
                 } else if (info === "closed") {
@@ -124,15 +134,15 @@ class Publishnew extends React.Component {
     }
 
     render() {
-        const {streamName, isShow} = this.state;
+        const { streamName, isShow } = this.state;
 
         return (
             <>
                 <div className="Publish">
                     YOU ARE IN PUBLISH PAGE <br />
                     <audio id="localAudio" autoPlay muted controls playsInline></audio>
-                    <br/>
-                    <input type="text" onChange={this.streamChangeHandler}/>
+                    <br />
+                    <input type="text" onChange={this.streamChangeHandler} />
                     {
                         isShow ? (
                             <button

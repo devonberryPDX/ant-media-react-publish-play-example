@@ -1,47 +1,56 @@
 import React from 'react';
-import './Player.css';
 import WebRTCAdaptor from './js/webrtc_adaptor';
 
 class Playernewauto extends React.Component {
-    webRTCAdaptor:?Object = null;
+    constructor(props) {
+        super(props);
 
-    state:Object = {
-        mediaConstraints: {
-            video: false,
-            audio: false
-        },
-        streamName: 'stream1',
-        token: '',
-        pc_config: {
-            'iceServers': [{
-                'urls': 'stun:stun.l.google.com:19302'
-            }]
-        },
-        sdpConstraints: {
-            OfferToReceiveAudio: true,
-            OfferToReceiveVideo: true
-        },
-        websocketURL: "wss://berryhousehold.ddns.net:5443/WebRTCAppEE/websocket",
-        isShow:false
-    };
+        /*
+        this.componentDidMount = this.componentDidMount().bind(this);
+        this.streamChangeHandler = this.streamChangeHandler().bind(this);
+        this.onStartPlaying = this.onStartPlaying().bind(this);
+        this.initiateWebrtc = this.initiateWebrtc().bind(this);
+        */
 
-    componentDidMount():void {
+        this.webRTCAdaptor = null;
+        this.state = {
+            mediaConstraints: {
+                video: false,
+                audio: false
+            },
+            streamName: 'stream1',
+            token: '',
+            pc_config: {
+                'iceServers': [{
+                    'urls': 'stun:stun.l.google.com:19302'
+                }]
+            },
+            sdpConstraints: {
+                OfferToReceiveAudio: true,
+                OfferToReceiveVideo: true
+            },
+            websocketURL: "wss://berryhousehold.ddns.net:5443/WebRTCAppEE/websocket",
+            isShow: false
+        };
+    }
+
+    componentDidMount() {
         this.webRTCAdaptor = this.initiateWebrtc();
         this.setState({
-            isShow:true
+            isShow: true
         });
     }
 
-    streamChangeHandler = ({target:{value}}:Event):void => {
+    streamChangeHandler(value) {
         console.log(value);
-        this.setState({streamName: value});
+        //this.setState({ streamName: value });
     }
 
-    onStartPlaying = (name:String):void => {
+    onStartPlaying(name) {
         this.webRTCAdaptor.play(this.state.streamName, this.state.token);
     }
 
-    initiateWebrtc():WebRTCAdaptor {
+    initiateWebrtc() {
         let thiz = this;
         return new WebRTCAdaptor({
             websocket_url: this.state.websocketURL,
@@ -116,9 +125,9 @@ class Playernewauto extends React.Component {
                 <div className="Player">
                     YOU ARE IN AUTO PLAY PAGE <br />
                     <video id="remoteVideo" autoPlay controls playsInline></video>
-                    <br/>
+                    <br />
                 </div>
-                <div/>
+                <div />
             </>
 
         );
