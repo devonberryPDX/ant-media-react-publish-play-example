@@ -58,7 +58,7 @@ class Playernew extends React.Component {
             mediaConstraints: this.state.mediaConstraints,
             peerconnection_config: this.state.pc_config,
             sdp_constraints: this.state.sdpConstraints,
-            remoteAudioId: "remoteAudio",
+            remoteVideoId: "remoteAudio",
             isPlayMode: true,
             debug: true,
             candidateTypes: ["tcp", "udp"],
