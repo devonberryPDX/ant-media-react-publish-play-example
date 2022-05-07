@@ -3,39 +3,33 @@ import WebRTCAdaptor from './js/webrtc_adaptor';
 
 class Publishnew extends React.Component {
 
-    state = {
-    mediaConstraints: {
-        video: false,
-        audio: true
-    },
-    streamName: 'stream1',
-    token: '',
-    pc_config: {
-        'iceServers': [{
-            'urls': 'stun:stun.l.google.com:19302'
-        }]
-    },
-    sdpConstraints: {
-        OfferToReceiveAudio: false,
-        OfferToReceiveVideo: false
-    },
-    websocketURL: "wss://berryhousehold.ddns.net:5443/WebRTCAppEE/websocket",
-    isShow: false
-};
+   
 
 
     constructor(props) {
         super(props);
 
-        
-        //this.componentDidMount = this.componentDidMount().bind(this);
-        //this.onStartPlaying = this.onStartPlaying().bind(this);
-        //this.initiateWebrtc = this.initiateWebrtc().bind(this);
-        
+        this.state = {
+            mediaConstraints: {
+                video: false,
+                audio: true
+            },
+            streamName: 'stream1',
+            token: '',
+            pc_config: {
+                'iceServers': [{
+                    'urls': 'stun:stun.l.google.com:19302'
+                }]
+            },
+            sdpConstraints: {
+                OfferToReceiveAudio: false,
+                OfferToReceiveVideo: false
+            },
+            websocketURL: "wss://berryhousehold.ddns.net:5443/WebRTCAppEE/websocket",
+            isShow: false
+        };
 
-        this.webRTCAdaptor = null;
-
-        
+        this.webRTCAdaptor = null;   
     }
 
     componentDidMount() {
@@ -54,18 +48,16 @@ class Publishnew extends React.Component {
         this.setState({
             isShow: true
         });
-        //this.streamChangeHandler = this.streamChangeHandler.bind(this);
     }
 
     streamChangeHandler = ({ target: { value } }) => {
         console.log("Current value:", value);
         this.setState({ streamName: value });
-        //onsole.log("Current streamname:", this.state.streamName);
     }
 
     onStartPublishing(name) {
         this.webRTCAdaptor.publish(this.state.streamName, this.state.token);
-        console.log("Current streamname:", this.state.streamName);
+        //console.log("Current streamname:", this.state.streamName);
     }
 
     initiateWebrtc() {
